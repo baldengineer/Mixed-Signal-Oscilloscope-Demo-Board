@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="25" unitdist="mil" unit="inch" style="lines" multiple="1" display="no" altdistance="12.5" altunitdist="mil" altunit="mil"/>
+<grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="12.5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
@@ -148,7 +148,7 @@
 <text x="62.865" y="30.48" size="1.4224" layer="25" rot="R90">james@baldengineer.com
 email | twitter | www</text>
 <text x="19.05" y="39.37" size="1.4224" layer="25" rot="R180">MSO Demo Board</text>
-<text x="5.715" y="41.275" size="1.4224" layer="25" rot="R180">R1</text>
+<text x="5.08" y="41.275" size="1.4224" layer="25" rot="R180">v2</text>
 </plain>
 <libraries>
 <library name="adafruit">
@@ -832,7 +832,7 @@ Please make sure your boards conform to these design rules.</description>
 <element name="U$1" library="Add-Ohms" package="OSHW-LOGO-S" value="OSHW-LOGOS" x="6.35" y="47.625"/>
 </elements>
 <signals>
-<signal name="GND">
+<signal name="GND" airwireshidden="yes">
 <contactref element="RESET" pad="3"/>
 <contactref element="RESET" pad="4"/>
 <contactref element="MODE" pad="3"/>
@@ -856,8 +856,6 @@ Please make sure your boards conform to these design rules.</description>
 <contactref element="LED7" pad="C"/>
 <contactref element="LED8" pad="C"/>
 <contactref element="IC1" pad="22"/>
-<contactref element="IC1" pad="21"/>
-<contactref element="IC1" pad="20"/>
 <contactref element="IC1" pad="8"/>
 <contactref element="C6" pad="1"/>
 <contactref element="C3" pad="1"/>
@@ -958,6 +956,12 @@ Please make sure your boards conform to these design rules.</description>
 <via x="57.15" y="41.91" extent="1-16" drill="0.6" shape="square"/>
 <wire x1="57.15" y1="41.91" x2="16.51" y2="41.91" width="0.254" layer="16"/>
 <wire x1="16.51" y1="41.91" x2="15.875" y2="41.275" width="0.254" layer="16"/>
+<contactref element="IC1" pad="21"/>
+<contactref element="IC1" pad="20"/>
+<wire x1="38.1" y1="12.7" x2="40.64" y2="12.7" width="0.3048" layer="16"/>
+<wire x1="40.64" y1="12.7" x2="40.64" y2="13.335" width="0.3048" layer="16"/>
+<wire x1="40.64" y1="13.335" x2="43.18" y2="15.875" width="0.3048" layer="16"/>
+<wire x1="43.18" y1="15.875" x2="43.18" y2="20.32" width="0.3048" layer="16"/>
 </signal>
 <signal name="RESET">
 <contactref element="J1" pad="5"/>
@@ -1217,25 +1221,33 @@ Please make sure your boards conform to these design rules.</description>
 </signal>
 <signal name="RXD">
 <contactref element="IC1" pad="2"/>
-<contactref element="JP4" pad="P$2"/>
 <wire x1="55.88" y1="20.32" x2="55.88" y2="21.59" width="0.254" layer="16"/>
 <wire x1="55.88" y1="21.59" x2="56.515" y2="22.225" width="0.254" layer="16"/>
 <wire x1="56.515" y1="22.225" x2="59.055" y2="22.225" width="0.254" layer="16"/>
 <wire x1="59.055" y1="22.225" x2="59.69" y2="21.59" width="0.254" layer="16"/>
 <wire x1="59.69" y1="21.59" x2="59.69" y2="18.415" width="0.254" layer="16"/>
-<wire x1="59.69" y1="18.415" x2="62.23" y2="15.875" width="0.254" layer="16"/>
-<wire x1="62.23" y1="15.875" x2="65.405" y2="15.875" width="0.254" layer="16"/>
+<contactref element="JP4" pad="P$3"/>
+<wire x1="59.69" y1="18.415" x2="60.325" y2="17.78" width="0.3048" layer="16"/>
+<wire x1="60.325" y1="17.78" x2="64.77" y2="17.78" width="0.3048" layer="16"/>
+<wire x1="64.77" y1="17.78" x2="65.405" y2="18.415" width="0.3048" layer="16"/>
 </signal>
 <signal name="TXD">
 <contactref element="IC1" pad="3"/>
-<contactref element="JP4" pad="P$3"/>
 <wire x1="53.34" y1="20.32" x2="53.34" y2="22.86" width="0.254" layer="16"/>
 <wire x1="53.34" y1="22.86" x2="53.975" y2="23.495" width="0.254" layer="16"/>
 <wire x1="53.975" y1="23.495" x2="60.325" y2="23.495" width="0.254" layer="16"/>
 <wire x1="60.325" y1="23.495" x2="60.96" y2="22.86" width="0.254" layer="16"/>
 <wire x1="60.96" y1="22.86" x2="60.96" y2="20.955" width="0.254" layer="16"/>
-<wire x1="60.96" y1="20.955" x2="63.5" y2="18.415" width="0.254" layer="16"/>
-<wire x1="63.5" y1="18.415" x2="65.405" y2="18.415" width="0.254" layer="16"/>
+<contactref element="JP4" pad="P$2"/>
+<wire x1="60.96" y1="20.955" x2="61.595" y2="20.955" width="0.3048" layer="16"/>
+<wire x1="61.595" y1="20.955" x2="62.23" y2="20.32" width="0.3048" layer="16"/>
+<wire x1="62.23" y1="20.32" x2="63.5" y2="20.32" width="0.3048" layer="16"/>
+<wire x1="63.5" y1="20.32" x2="64.135" y2="19.685" width="0.3048" layer="16"/>
+<wire x1="64.135" y1="19.685" x2="66.3575" y2="19.685" width="0.3048" layer="16"/>
+<wire x1="66.3575" y1="19.685" x2="66.9925" y2="19.05" width="0.3048" layer="16"/>
+<wire x1="66.9925" y1="19.05" x2="66.9925" y2="16.1925" width="0.3048" layer="16"/>
+<wire x1="66.9925" y1="16.1925" x2="66.675" y2="15.875" width="0.3048" layer="16"/>
+<wire x1="66.675" y1="15.875" x2="65.405" y2="15.875" width="0.3048" layer="16"/>
 </signal>
 <signal name="SDA">
 <contactref element="IC1" pad="27"/>

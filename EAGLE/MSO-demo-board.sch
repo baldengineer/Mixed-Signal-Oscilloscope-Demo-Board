@@ -12164,11 +12164,13 @@ We've spent an enormous amount of time creating and checking these footprints an
 <part name="MODE_LED" library="LilyPad-Wearables" deviceset="LED" device="1206" value="AMB"/>
 <part name="GND15" library="SparkFun" deviceset="GND" device=""/>
 <part name="U$1" library="Add-Ohms" deviceset="OSHW-LOGO" device="S"/>
+<part name="P+1" library="SparkFun" deviceset="VCC" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="93.98" y="33.02" size="1.778" layer="91">Buttons expect internal pull-ups</text>
+<text x="241.3" y="7.62" size="1.778" layer="91">2</text>
 </plain>
 <instances>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
@@ -12209,7 +12211,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <instance part="GND4" gate="1" x="111.76" y="53.34"/>
 <instance part="GND5" gate="1" x="76.2" y="66.04"/>
 <instance part="GND6" gate="1" x="63.5" y="119.38"/>
-<instance part="GND7" gate="1" x="91.44" y="132.08"/>
+<instance part="GND7" gate="1" x="83.82" y="137.16"/>
 <instance part="GND8" gate="1" x="38.1" y="147.32"/>
 <instance part="GND9" gate="1" x="38.1" y="38.1"/>
 <instance part="RESET" gate="S" x="73.66" y="15.24"/>
@@ -12236,6 +12238,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <instance part="MODE_LED" gate="G$1" x="104.14" y="43.18" rot="R90"/>
 <instance part="GND15" gate="1" x="111.76" y="38.1"/>
 <instance part="U$1" gate="G$1" x="17.78" y="12.7"/>
+<instance part="P+1" gate="1" x="93.98" y="134.62" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -12355,13 +12358,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <segment>
 <pinref part="IC1" gate="G$1" pin="AGND"/>
 <pinref part="GND7" gate="1" pin="GND"/>
-<wire x1="99.06" y1="139.7" x2="91.44" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="91.44" y1="139.7" x2="91.44" y2="137.16" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="G$1" pin="AREF"/>
-<wire x1="91.44" y1="137.16" x2="91.44" y2="134.62" width="0.1524" layer="91"/>
-<wire x1="99.06" y1="137.16" x2="91.44" y2="137.16" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="G$1" pin="AVCC"/>
-<wire x1="99.06" y1="134.62" x2="91.44" y2="134.62" width="0.1524" layer="91"/>
+<wire x1="99.06" y1="139.7" x2="83.82" y2="139.7" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="G$1" pin="GND"/>
@@ -12481,6 +12478,15 @@ We've spent an enormous amount of time creating and checking these footprints an
 <pinref part="JP4" gate="G$1" pin="VCC"/>
 <wire x1="22.86" y1="78.74" x2="12.7" y2="78.74" width="0.1524" layer="91"/>
 <label x="12.7" y="78.74" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="AREF"/>
+<wire x1="99.06" y1="137.16" x2="93.98" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="93.98" y1="137.16" x2="93.98" y2="134.62" width="0.1524" layer="91"/>
+<pinref part="IC1" gate="G$1" pin="AVCC"/>
+<wire x1="93.98" y1="134.62" x2="99.06" y2="134.62" width="0.1524" layer="91"/>
+<pinref part="P+1" gate="1" pin="VCC"/>
+<junction x="93.98" y="134.62"/>
 </segment>
 </net>
 <net name="RESET" class="0">
@@ -12806,9 +12812,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <label x="157.48" y="119.38" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="JP4" gate="G$1" pin="TXO"/>
-<wire x1="22.86" y1="83.82" x2="12.7" y2="83.82" width="0.1524" layer="91"/>
-<label x="12.7" y="83.82" size="1.778" layer="95"/>
+<pinref part="JP4" gate="G$1" pin="RXI"/>
+<wire x1="22.86" y1="81.28" x2="12.7" y2="81.28" width="0.1524" layer="91"/>
+<label x="12.7" y="81.28" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="TXD" class="0">
@@ -12818,9 +12824,9 @@ We've spent an enormous amount of time creating and checking these footprints an
 <label x="157.48" y="116.84" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="JP4" gate="G$1" pin="RXI"/>
-<wire x1="22.86" y1="81.28" x2="12.7" y2="81.28" width="0.1524" layer="91"/>
-<label x="12.7" y="81.28" size="1.778" layer="95"/>
+<pinref part="JP4" gate="G$1" pin="TXO"/>
+<wire x1="22.86" y1="83.82" x2="12.7" y2="83.82" width="0.1524" layer="91"/>
+<label x="12.7" y="83.82" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SDA" class="0">
