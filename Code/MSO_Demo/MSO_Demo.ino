@@ -1,6 +1,16 @@
 #define ON true
 #define OFF false
 
+const byte sw_mode = A0;
+const byte sw_fast = A1;
+const byte sw_slow = A2;
+const byte mode_led = A3;
+
+boolean previous_mode = HIGH;
+boolean previous_fast = HIGH;
+boolean previous_slow = HIGH;
+boolean mode_led_state = false;
+
 byte counter=0;
 int delayTime = 50;
 boolean enableError = false;
@@ -19,12 +29,23 @@ void setup() {
   for(int i=0; i<8; i++)
     pinMode(i+2, OUTPUT);
   pinMode(13, OUTPUT);
+  
+  pinMode(sw_mode, INPUT_PULLUP); //MODE
+  pinMode(sw_fast, INPUT_PULLUP); // FAST
+  pinMode(sw_slow, INPUT_PULLUP); // SLOW
+  pinMode(mode_led, OUTPUT);  // LED
+  
+  randomSeed(analogRead(A4));
 }
 
 void loop() {
   // put your main code here, to run repeatedly: 
+  digitalWrite(mode_led, mode_led_state);
+  processButtons();
+  
   while (Serial.available())
     processSerial();
+
 
   if (showNewTime) printTime();
 
@@ -58,6 +79,7 @@ void checkError() {
        errorState = OFF;
        endOfError = endOfError + errorTimeOut;
        displayError = false;
+       analogWrite(11, 0);
      }
   } else {
        // leave the bit low for errorTimeOut
@@ -66,6 +88,7 @@ void checkError() {
        errorState = ON;
        endOfError = endOfError + errorTimeOut;
        displayError = true;
+       analogWrite(11, random(64,192));
      }
   }
 }
@@ -80,6 +103,52 @@ void printTime() {
   showNewTime = false; 
 }
 
+/*
+const byte sw_mode = A0;
+const byte sw_fast = A1;
+const byte sw_slow = A2;
+const byte mode_led = A3;
+
+boolean previous_mode = HIGH;
+boolean previous_fast = HIGH;
+boolean previous_slow = HIGH;
+boolean mode_led_state = FALSE;
+*/
+
+void processButtons() {
+  boolean current_mode = digitalRead(sw_mode);
+  boolean current_fast = digitalRead(sw_fast);
+  boolean current_slow = digitalRead(sw_slow);
+  
+  if ((previous_mode == HIGH) && (current_mode == LOW)) {
+    enableError = !enableError;
+    mode_led_state = enableError;
+    showNewTime = true; 
+  }
+  
+  if ((previous_fast == HIGH) && (current_fast == LOW)) {
+    delayTime -= 10;
+    showNewTime = true;
+  }
+  
+  if ((previous_slow == HIGH) && (current_slow == LOW)) {
+    delayTime += 10;
+    showNewTime = true;
+  }
+  
+  checkDelayBounds();
+  
+  
+  previous_mode = current_mode;
+  previous_fast = current_fast;
+  previous_slow = current_slow;
+}
+
+void checkDelayBounds() {
+    if (delayTime <= 0) delayTime = 1;
+    if (delayTime >= 1000) delayTime = 1000; 
+}
+
 void processSerial() {
   int incoming = Serial.read();
 
@@ -92,9 +161,7 @@ void processSerial() {
   if (incoming == '-')
     delayTime -= 10;
 
-  if (delayTime <= 0) delayTime = 1;
-
-  if (delayTime >= 1000) delayTime = 1000; 
+  checkDelayBounds();
 
   showNewTime = true;
   delay(1); //add a little more time to give another character a chance to arrive.
